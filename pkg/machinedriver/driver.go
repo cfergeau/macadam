@@ -85,6 +85,40 @@ func NewDriver(hostName, storePath string) *Driver {
 	}
 }
 
+// this func should return the driver by using the machineName
+func GetDriverByMachineName(machineName string) (*Driver, error) {
+	provider, err := provider2.Get()
+	if err != nil {
+		return nil, err
+	}
+
+	dirs, err := env.GetMachineDirs(provider.VMType())
+	if err != nil {
+		return nil, err
+	}
+
+	mc, err := vmconfigs.LoadMachineByName(machineName, dirs)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Driver{
+		VMDriver: &drivers.VMDriver{
+			BaseDriver: &drivers.BaseDriver{
+				MachineName: machineName,
+			},
+			CPU:    DefaultCPUs,
+			Memory: DefaultMemory,
+		},
+		// needed when loading a VM which was created before
+		// DaemonVsockPort was introduced
+		DaemonVsockPort: DaemonVsockPort,
+		vmConfig:        mc,
+
+		vmProvider: provider,
+	}, nil
+}
+
 // DriverName returns the name of the driver
 func (d *Driver) DriverName() string {
 	return DriverName
@@ -132,10 +166,10 @@ func (d *Driver) initOpts() *define.InitOptions {
 		initOpts.Volumes = defaultConfig.Machine.Volumes.Get()
 	*/
 	initOpts.Username = "core"
-	initOpts.SSHIdentityPath = d.VMDriver.SSHConfig.IdentityPath
-	if d.VMDriver.SSHConfig.RemoteUsername != "" {
+	//initOpts.SSHIdentityPath = d.VMDriver.SSHConfig.IdentityPath
+	/* if d.VMDriver.SSHConfig.RemoteUsername != "" {
 		initOpts.Username = d.VMDriver.SSHConfig.RemoteUsername
-	}
+	} */
 	initOpts.Image = d.getDiskPath()
 	initOpts.Volumes = []string{}
 	initOpts.USBs = []string{}
