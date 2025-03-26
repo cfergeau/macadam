@@ -33,7 +33,7 @@ var (
 type InspectInfo struct {
 	ConfigDir          define.VMFile
 	Created            time.Time
-	LastUp             time.Time `json:",omitempty"`
+	LastUp             *time.Time `json:",omitempty"`
 	Name               string
 	Resources          vmconfigs.ResourceConfig
 	SSHConfig          vmconfigs.SSHConfig
@@ -79,12 +79,15 @@ func inspect(cmd *cobra.Command, args []string) error {
 		ii := InspectInfo{
 			ConfigDir:          *dirs.ConfigDir,
 			Created:            mc.Created,
-			LastUp:             mc.LastUp,
+			LastUp:             &mc.LastUp,
 			Name:               mc.Name,
 			Resources:          mc.Resources,
 			SSHConfig:          mc.SSH,
 			State:              state,
 			UserModeNetworking: provider.UserModeNetworkEnabled(mc),
+		}
+		if ii.LastUp.IsZero() {
+			ii.LastUp = nil
 		}
 
 		vms = append(vms, ii)
