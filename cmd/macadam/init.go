@@ -10,6 +10,7 @@ import (
 	"github.com/containers/common/pkg/completion"
 	ldefine "github.com/containers/podman/v5/libpod/define"
 	"github.com/containers/podman/v5/pkg/machine/define"
+	"github.com/containers/podman/v5/pkg/machine/env"
 	provider2 "github.com/containers/podman/v5/pkg/machine/provider"
 	"github.com/containers/podman/v5/pkg/machine/shim"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
@@ -154,13 +155,6 @@ func initMachine(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	/*
-		dirs, err := env.GetMachineDirs(provider.VMType())
-		if err != nil {
-			return err
-		}
-	*/
-
 	diskImage := ""
 	if len(args) > 0 {
 		diskImage = args[0]
@@ -180,12 +174,23 @@ func initMachine(cmd *cobra.Command, args []string) error {
 	initOpts := macadam.DefaultInitOpts(machineName)
 	initOpts.ImagePuller = puller
 	initOpts.ImagePuller.SetSourceURI(diskImage)
-	initOpts.Name = machineName
 	initOpts.Image = diskImage
 	initOpts.CPUS = initOptsFromFlags.CPUS
 	initOpts.DiskSize = initOptsFromFlags.DiskSize
 	initOpts.Memory = initOptsFromFlags.Memory
 	initOpts.SSHIdentityPath = initOptsFromFlags.SSHIdentityPath
+	if initOpts.SSHIdentityPath == "" {
+		dirs, err := env.GetMachineDirs(provider.VMType())
+		if err != nil {
+			return err
+		}
+
+		sshIdentityVMFile, err := dirs.DataDir.AppendToNewVMFile(fmt.Sprintf("%s-id-ed25519", machineName), nil)
+		if err != nil {
+			return err
+		}
+		initOpts.SSHIdentityPath = sshIdentityVMFile.Path
+	}
 	initOpts.Username = initOptsFromFlags.Username
 	initOpts.CloudInit = true // this should be calculated based on the image we want to start ??
 	initOpts.Capabilities = &define.MachineCapabilities{
