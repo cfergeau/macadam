@@ -21,12 +21,10 @@ $(TMP_BIN)/vfkit:
 	mkdir -p $(TMP_BIN)
 	cd $(TMP_BIN) && curl -sLo vfkit $(VFKIT_RELEASE_URL)
 
-$(TMP_BIN)/macadam:
+$(TMP_BIN)/macadam: ../../bin/macadam-darwin-universal
 	mkdir -p $(TMP_BIN)
-	$(MAKE) -C ../.. bin/macadam-darwin-amd64
-	$(MAKE) -C ../.. bin/macadam-darwin-arm64
-	cp ../../bin/macadam-darwin-amd64 $(TMP_BIN)/macadam-darwin-amd64
-	cp ../../bin/macadam-darwin-arm64 $(TMP_BIN)/macadam-darwin-arm64
+	$(MAKE) -C ../.. bin/macadam-darwin-universal
+	cp ../../bin/macadam-darwin-universal $(TMP_BIN)/macadam
 
 packagedir: package_root Distribution welcome.html
 	mkdir -p $(PACKAGE_DIR)
@@ -45,8 +43,7 @@ package_root: clean-pkgroot $(TMP_BIN)/gvproxy $(TMP_BIN)/vfkit $(TMP_BIN)/macad
 	mkdir -p $(PACKAGE_ROOT)/macadam/bin
 	cp $(TMP_BIN)/gvproxy $(PACKAGE_ROOT)/macadam/bin/
 	cp $(TMP_BIN)/vfkit $(PACKAGE_ROOT)/macadam/bin/
-	cp $(TMP_BIN)/macadam-darwin-amd64 $(PACKAGE_ROOT)/macadam/bin/
-	cp $(TMP_BIN)/macadam-darwin-arm64 $(PACKAGE_ROOT)/macadam/bin/
+	cp $(TMP_BIN)/macadam $(PACKAGE_ROOT)/macadam/bin/
 	chmod a+x $(PACKAGE_ROOT)/macadam/bin/*
 
 %: %.in

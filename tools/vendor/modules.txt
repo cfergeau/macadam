@@ -652,6 +652,9 @@ github.com/quasilyte/stdinfo
 # github.com/raeperd/recvcheck v0.2.0
 ## explicit; go 1.22.0
 github.com/raeperd/recvcheck
+# github.com/randall77/makefat v0.0.0-20210315173500-7ddd0e42c844
+## explicit; go 1.13
+github.com/randall77/makefat
 # github.com/rivo/uniseg v0.4.7
 ## explicit; go 1.18
 github.com/rivo/uniseg

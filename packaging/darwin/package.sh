@@ -17,12 +17,6 @@ binDir="${BASEDIR}/root/macadam/bin"
 
 version=$(cat "${BASEDIR}/VERSION")
 
-function build_fat(){
-    echo "Creating universal binary"
-    lipo -create -output "${binDir}/macadam" "${binDir}/macadam-darwin-arm64" "${binDir}/macadam-darwin-amd64"
-    rm "${binDir}/macadam-darwin-arm64" "${binDir}/macadam-darwin-amd64"
-}
-
 function sign() {
   local opts=""
   entitlements="${BASEDIR}/$(basename "$1").entitlements"
@@ -31,8 +25,6 @@ function sign() {
   fi
   codesign --sign "${CODESIGN_IDENTITY}" --options runtime --timestamp --force ${opts} "$1"
 }
-
-build_fat
 
 sign "${binDir}/macadam"
 sign "${binDir}/gvproxy"

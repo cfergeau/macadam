@@ -23,7 +23,7 @@ include tools/tools.mk
 
 cross-non-darwin: bin/macadam-linux-amd64 bin/macadam-linux-arm64 bin/macadam-windows-amd64
 
-cross: cross-non-darwin bin/macadam-darwin-amd64 bin/macadam-darwin-arm64
+cross: cross-non-darwin bin/macadam-darwin-universal
 
 check: lint vendorcheck test
 
@@ -44,6 +44,9 @@ bin/macadam-darwin-arm64: GOARCH=arm64
 bin/macadam-darwin-arm64: HELPER_BINARIES_DIR=/opt/macadam/bin
 bin/macadam-darwin-arm64: force-build
 	GOARCH=$(GOARCH) GOOS=$(GOOS) go build -tags "$(BUILDTAGS)" -ldflags "$(MACADAM_LDFLAGS)" -o bin/macadam-$(GOOS)-$(GOARCH) ./cmd/macadam
+
+bin/macadam-darwin-universal: bin/macadam-darwin-amd64 bin/macadam-darwin-arm64 | $(TOOLS_BINDIR)/makefat
+	"$(TOOLS_BINDIR)"/makefat $@ $^
 
 bin/macadam-linux-amd64: GOOS=linux
 bin/macadam-linux-amd64: GOARCH=amd64
