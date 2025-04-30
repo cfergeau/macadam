@@ -1,6 +1,5 @@
 SHELL := bash
 
-MACADAM_VERSION = 0.0.2
 GVPROXY_VERSION ?= 0.8.5
 VFKIT_VERSION ?= 0.6.1
 GVPROXY_RELEASE_URL ?= https://github.com/containers/gvisor-tap-vsock/releases/download/v$(GVPROXY_VERSION)/gvproxy-darwin
@@ -12,6 +11,9 @@ PKG_NAME := macadam-installer-macos-universal.pkg
 
 .PHONY: pkginstaller packagedir
 default: pkginstaller
+
+VERSION: $(TMP_BIN)/macadam
+	$< --version >$@
 
 $(TMP_BIN)/gvproxy:
 	mkdir -p $(TMP_BIN)
@@ -35,8 +37,7 @@ packagedir: package_root Distribution welcome.html
 	cp -r $(PACKAGE_ROOT) $(PACKAGE_DIR)/
 	cp package.sh $(PACKAGE_DIR)/
 	cd $(PACKAGE_DIR) && pkgbuild --analyze --root ./root component.plist
-# Modify echo with an executable like podman
-	echo '$(MACADAM_VERSION)' > $(PACKAGE_DIR)/VERSION
+	cp VERSION $(PACKAGE_DIR)/
 	cp vfkit.entitlements $(PACKAGE_DIR)/
 
 package_root: clean-pkgroot $(TMP_BIN)/gvproxy $(TMP_BIN)/vfkit $(TMP_BIN)/macadam
@@ -46,8 +47,9 @@ package_root: clean-pkgroot $(TMP_BIN)/gvproxy $(TMP_BIN)/vfkit $(TMP_BIN)/macad
 	cp $(TMP_BIN)/macadam $(PACKAGE_ROOT)/macadam/bin/
 	chmod a+x $(PACKAGE_ROOT)/macadam/bin/*
 
-%: %.in
-	@sed -e 's/__VERSION__/'$(MACADAM_VERSION)'/g' $< >$@
+%: %.in VERSION
+	@sed -e 's/__VERSION__/'$(shell cat VERSION)'/g' $< >$@
+
 
 pkginstaller: packagedir
 	cd $(PACKAGE_DIR) && ./package.sh ..
@@ -60,7 +62,7 @@ notarize: _notarize
 
 .PHONY: clean clean-pkgroot
 clean:
-	rm -rf $(TMP_BIN) $(PACKAGE_ROOT) $(PACKAGE_DIR) out Distribution welcome.html ../../test/version/version
+	rm -rf $(TMP_BIN) $(PACKAGE_ROOT) $(PACKAGE_DIR) out Distribution welcome.html VERSION
 
 clean-pkgroot:
 	rm -rf $(PACKAGE_ROOT) $(PACKAGE_DIR) Distribution welcome.html
