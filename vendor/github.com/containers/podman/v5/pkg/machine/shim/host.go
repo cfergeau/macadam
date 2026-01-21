@@ -153,7 +153,7 @@ func Init(opts machineDefine.InitOptions, mp vmconfigs.VMProvider) error {
 
 	imagePuller := opts.ImagePuller
 	if imagePuller == nil {
-		imagePuller, err = vmconfigs.NewQuayPuller(mp.VMType(), mc)
+		imagePuller, err = vmconfigs.NewQuayPuller(mp.VMType(), mc, opts.SkipTlsVerify)
 		if err != nil {
 			return err
 		}
@@ -494,7 +494,7 @@ func Start(mc *vmconfigs.MachineConfig, mp vmconfigs.VMProvider, dirs *machineDe
 	// if the machine cannot continue starting due to a signal, ensure the state
 	// reflects the machine is no longer starting
 	signalChan := make(chan os.Signal, 1)
-	signal.Notify(signalChan, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(signalChan, os.Interrupt, syscall.SIGTERM, syscall.SIGPIPE)
 	go func() {
 		sig, ok := <-signalChan
 		if ok {
@@ -779,7 +779,7 @@ func confirmationMessage(files []string) {
 	}
 }
 
-func Reset(mps []vmconfigs.VMProvider, opts machine.ResetOptions) error {
+func Reset(mps []vmconfigs.VMProvider, _ machine.ResetOptions) error {
 	var resetErrors *multierror.Error
 	removeDirs := []*machineDefine.MachineDirs{}
 

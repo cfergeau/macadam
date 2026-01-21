@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/containers/common/pkg/config"
 	gvproxy "github.com/containers/gvisor-tap-vsock/pkg/types"
 	"github.com/containers/podman/v5/pkg/machine"
 	"github.com/containers/podman/v5/pkg/machine/connection"
@@ -17,6 +16,7 @@ import (
 	"github.com/containers/podman/v5/pkg/machine/sockets"
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/common/pkg/config"
 )
 
 const (
@@ -150,7 +150,7 @@ func startNetworking(mc *vmconfigs.MachineConfig, provider vmconfigs.VMProvider)
 // conductVMReadinessCheck checks to make sure the machine is in the proper state
 // and that SSH is up and running
 func conductVMReadinessCheck(mc *vmconfigs.MachineConfig, maxBackoffs int, backoff time.Duration, stateF func() (define.Status, error)) (connected bool, sshError error, err error) {
-	for i := 0; i < maxBackoffs; i++ {
+	for i := range maxBackoffs {
 		if i > 0 {
 			time.Sleep(backoff)
 			backoff *= 2

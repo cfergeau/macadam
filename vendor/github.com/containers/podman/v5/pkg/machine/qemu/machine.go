@@ -18,9 +18,9 @@ import (
 	"github.com/containers/podman/v5/pkg/machine/cloudinit"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
-	"github.com/containers/storage/pkg/fileutils"
 	"github.com/digitalocean/go-qemu/qmp"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/storage/pkg/fileutils"
 )
 
 func NewStubber() (*QEMUStubber, error) {
@@ -95,7 +95,7 @@ func (q *QEMUStubber) checkStatus(monitor *qmp.SocketMonitor) (define.Status, er
 func (q *QEMUStubber) waitForMachineToStop(mc *vmconfigs.MachineConfig) error {
 	fmt.Println("Waiting for VM to stop running...")
 	waitInternal := 250 * time.Millisecond
-	for i := 0; i < 5; i++ {
+	for range 5 {
 		state, err := q.State(mc, false)
 		if err != nil {
 			return err
@@ -256,7 +256,7 @@ func (q *QEMUStubber) Remove(mc *vmconfigs.MachineConfig) ([]string, func() erro
 	}, nil
 }
 
-func (q *QEMUStubber) State(mc *vmconfigs.MachineConfig, bypass bool) (define.Status, error) {
+func (q *QEMUStubber) State(mc *vmconfigs.MachineConfig, _ bool) (define.Status, error) {
 	// Check if qmp socket path exists
 	if err := fileutils.Exists(mc.QEMUHypervisor.QMPMonitor.Address.GetPath()); errors.Is(err, fs.ErrNotExist) {
 		return define.Stopped, nil

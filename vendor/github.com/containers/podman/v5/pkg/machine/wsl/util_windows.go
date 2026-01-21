@@ -17,9 +17,9 @@ import (
 
 	"github.com/Microsoft/go-winio"
 	"github.com/containers/podman/v5/pkg/machine/define"
-	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/storage/pkg/fileutils"
+	"go.podman.io/storage/pkg/homedir"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
 )
@@ -175,7 +175,7 @@ func wrapMaybe(err error, message string) error {
 	return errors.New(message)
 }
 
-func wrapMaybef(err error, format string, args ...interface{}) error {
+func wrapMaybef(err error, format string, args ...any) error {
 	if err != nil {
 		return fmt.Errorf(format+": %w", append(args, err)...)
 	}
@@ -199,11 +199,11 @@ func reboot() error {
 	if err != nil {
 		return fmt.Errorf("could not determine data directory: %w", err)
 	}
-	if err := os.MkdirAll(dataDir, 0755); err != nil {
+	if err := os.MkdirAll(dataDir, 0o755); err != nil {
 		return fmt.Errorf("could not create data directory: %w", err)
 	}
 	commFile := filepath.Join(dataDir, "podman-relaunch.dat")
-	if err := os.WriteFile(commFile, []byte(encoded), 0600); err != nil {
+	if err := os.WriteFile(commFile, []byte(encoded), 0o600); err != nil {
 		return fmt.Errorf("could not serialize command state: %w", err)
 	}
 

@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/containers/podman/v5/pkg/machine/define"
-	"github.com/containers/storage/pkg/fileutils"
+	"go.podman.io/storage/pkg/fileutils"
 )
 
 // defaultQMPTimeout is the timeout duration for the
@@ -125,7 +125,7 @@ type Monitor struct {
 // NewQMPMonitor creates the monitor subsection of our vm
 func NewQMPMonitor(name string, machineRuntimeDir *define.VMFile) (Monitor, error) {
 	if err := fileutils.Exists(machineRuntimeDir.GetPath()); errors.Is(err, fs.ErrNotExist) {
-		if err := os.MkdirAll(machineRuntimeDir.GetPath(), 0755); err != nil {
+		if err := os.MkdirAll(machineRuntimeDir.GetPath(), 0o755); err != nil {
 			return Monitor{}, err
 		}
 	}

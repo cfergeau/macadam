@@ -10,16 +10,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/containers/common/pkg/strongunits"
 	"github.com/containers/podman/v5/pkg/errorhandling"
 	"github.com/containers/podman/v5/pkg/machine/connection"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/lock"
 	"github.com/containers/podman/v5/pkg/machine/ports"
-	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/ioutils"
-	"github.com/containers/storage/pkg/lockfile"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/common/pkg/strongunits"
+	"go.podman.io/storage/pkg/fileutils"
+	"go.podman.io/storage/pkg/ioutils"
+	"go.podman.io/storage/pkg/lockfile"
 )
 
 /*
@@ -315,7 +315,7 @@ func (mc *MachineConfig) IsFirstBoot() bool {
 	return mc.LastUp.IsZero()
 }
 
-func (mc *MachineConfig) ConnectionInfo(vmtype define.VMType) (*define.VMFile, *define.VMFile, error) {
+func (mc *MachineConfig) ConnectionInfo(_ define.VMType) (*define.VMFile, *define.VMFile, error) {
 	socket, err := mc.APISocket()
 	return socket, getPipe(mc.Name), err
 }
@@ -381,7 +381,7 @@ func loadMachineFromFQPath(path *define.VMFile) (*MachineConfig, error) {
 // LoadMachinesInDir returns all the machineconfigs located in given dir
 func LoadMachinesInDir(dirs *define.MachineDirs) (map[string]*MachineConfig, error) {
 	mcs := make(map[string]*MachineConfig)
-	if err := filepath.WalkDir(dirs.ConfigDir.GetPath(), func(path string, d fs.DirEntry, err error) error {
+	if err := filepath.WalkDir(dirs.ConfigDir.GetPath(), func(_ string, d fs.DirEntry, _ error) error {
 		if strings.HasSuffix(d.Name(), ".json") {
 			fullPath, err := dirs.ConfigDir.AppendToNewVMFile(d.Name(), nil)
 			if err != nil {

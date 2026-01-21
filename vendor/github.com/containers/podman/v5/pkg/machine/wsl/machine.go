@@ -14,15 +14,15 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/containers/common/pkg/config"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/env"
 	"github.com/containers/podman/v5/pkg/machine/ignition"
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
 	"github.com/containers/podman/v5/pkg/machine/wsl/wutil"
 	"github.com/containers/podman/v5/utils"
-	"github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/common/pkg/config"
+	"go.podman.io/storage/pkg/homedir"
 )
 
 var (
@@ -85,7 +85,7 @@ func provisionWSLDist(name string, imagePath string, prompt string) (string, err
 
 	distDir := filepath.Join(vmDataDir, "wsldist")
 	distTarget := filepath.Join(distDir, name)
-	if err := os.MkdirAll(distDir, 0755); err != nil {
+	if err := os.MkdirAll(distDir, 0o755); err != nil {
 		return "", fmt.Errorf("could not create wsldist directory: %w", err)
 	}
 
@@ -435,11 +435,11 @@ func getElevatedOutputFile(mode int) (*os.File, error) {
 		return nil, err
 	}
 
-	if err = os.MkdirAll(dir, 0755); err != nil {
+	if err = os.MkdirAll(dir, 0o755); err != nil {
 		return nil, err
 	}
 
-	return os.OpenFile(name, mode, 0644)
+	return os.OpenFile(name, mode, 0o644)
 }
 
 func isMsiError(err error) bool {

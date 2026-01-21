@@ -19,8 +19,9 @@ import (
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/env"
 	"github.com/containers/podman/v5/pkg/machine/sockets"
-	"github.com/containers/storage/pkg/fileutils"
 	"github.com/sirupsen/logrus"
+	"go.podman.io/common/pkg/config"
+	"go.podman.io/storage/pkg/fileutils"
 )
 
 const (
@@ -132,7 +133,11 @@ func launchWinProxy(opts WinProxyOpts) (bool, string, error) {
 
 	globalName := PipeNameAvailable(GlobalNamedPipe, GlobalNameWait)
 
-	command, err := FindExecutablePeer(winSSHProxy)
+	cfg, err := config.Default()
+	if err != nil {
+		return globalName, "", err
+	}
+	command, err := cfg.FindHelperBinary(winSSHProxy, false)
 	if err != nil {
 		return globalName, "", err
 	}
@@ -241,20 +246,6 @@ func sendQuit(tid uint32) {
 	_, _, _ = postMessage.Call(uintptr(tid), WM_QUIT, 0, 0)
 }
 
-func FindExecutablePeer(name string) (string, error) {
-	exe, err := os.Executable()
-	if err != nil {
-		return "", err
-	}
-
-	exe, err = EvalSymlinksOrClean(exe)
-	if err != nil {
-		return "", err
-	}
-
-	return filepath.Join(filepath.Dir(exe), name), nil
-}
-
 func EvalSymlinksOrClean(filePath string) (string, error) {
 	fileInfo, err := os.Lstat(filePath)
 	if err != nil {
@@ -283,7 +274,7 @@ func GetWinProxyStateDir(name string, vmtype define.VMType) (string, error) {
 		return "", err
 	}
 	stateDir := filepath.Join(dir, name)
-	if err = os.MkdirAll(stateDir, 0755); err != nil {
+	if err = os.MkdirAll(stateDir, 0o755); err != nil {
 		return "", err
 	}
 

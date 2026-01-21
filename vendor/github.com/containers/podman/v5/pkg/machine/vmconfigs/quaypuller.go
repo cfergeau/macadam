@@ -7,6 +7,7 @@ import (
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/env"
 	"github.com/containers/podman/v5/pkg/machine/shim/diskpull"
+	"go.podman.io/image/v5/types"
 )
 
 type QuayPuller struct {
@@ -15,12 +16,14 @@ type QuayPuller struct {
 	vmType        define.VMType
 	machineConfig *MachineConfig
 	machineDirs   *define.MachineDirs
+	skipTlsVerify types.OptionalBool
 }
 
-func NewQuayPuller(vmType define.VMType, mc *MachineConfig) (*QuayPuller, error) {
+func NewQuayPuller(vmType define.VMType, mc *MachineConfig, skipTlsVerify types.OptionalBool) (*QuayPuller, error) {
 	puller := QuayPuller{
 		vmType:        vmType,
 		machineConfig: mc,
+		skipTlsVerify: skipTlsVerify,
 	}
 
 	dirs, err := env.GetMachineDirs(vmType)
@@ -64,5 +67,5 @@ func (puller QuayPuller) Download() error {
 	if err != nil {
 		return err
 	}
-	return diskpull.GetDisk(puller.sourceURI, puller.machineDirs, imagePath, puller.vmType, puller.machineConfig.Name)
+	return diskpull.GetDisk(puller.sourceURI, puller.machineDirs, imagePath, puller.vmType, puller.machineConfig.Name, puller.skipTlsVerify)
 }

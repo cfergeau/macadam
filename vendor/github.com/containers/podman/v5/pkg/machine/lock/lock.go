@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/containers/podman/v5/pkg/machine/env"
-	"github.com/containers/storage/pkg/lockfile"
+	"go.podman.io/storage/pkg/lockfile"
 )
 
 func GetMachineLockPath(name string, machineConfigDir string) string {
