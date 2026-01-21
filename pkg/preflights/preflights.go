@@ -6,10 +6,10 @@ import (
 	"log/slog"
 	"os/exec"
 
-	"github.com/containers/common/pkg/config"
 	"github.com/containers/podman/v5/pkg/machine"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	"go.podman.io/common/pkg/config"
 )
 
 func RunPreflights(provider vmconfigs.VMProvider, userModeNetworking *bool) error {

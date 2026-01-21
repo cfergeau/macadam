@@ -190,8 +190,6 @@ github.com/containers/common/pkg/manifests
 github.com/containers/common/pkg/netns
 github.com/containers/common/pkg/parse
 github.com/containers/common/pkg/password
-github.com/containers/common/pkg/report
-github.com/containers/common/pkg/report/camelcase
 github.com/containers/common/pkg/resize
 github.com/containers/common/pkg/retry
 github.com/containers/common/pkg/rootlessport
@@ -556,6 +554,8 @@ github.com/disiqueira/gotree/v3
 # github.com/distribution/reference v0.6.0
 ## explicit; go 1.20
 github.com/distribution/reference
+# github.com/docker/cli v28.5.1+incompatible
+## explicit
 # github.com/docker/distribution v2.8.3+incompatible
 ## explicit
 github.com/docker/distribution/registry/api/errcode
@@ -941,6 +941,8 @@ github.com/seccomp/libseccomp-golang
 # github.com/secure-systems-lab/go-securesystemslib v0.9.1
 ## explicit; go 1.23.0
 github.com/secure-systems-lab/go-securesystemslib/encrypted
+# github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3
+## explicit; go 1.13
 # github.com/shirou/gopsutil/v4 v4.25.10
 ## explicit; go 1.24.0
 github.com/shirou/gopsutil/v4/common
@@ -1068,9 +1070,38 @@ go.opentelemetry.io/otel/trace
 go.opentelemetry.io/otel/trace/embedded
 go.opentelemetry.io/otel/trace/internal/telemetry
 go.opentelemetry.io/otel/trace/noop
-# go.podman.io/common v0.66.0
+# go.podman.io/common v0.66.1
 ## explicit; go 1.24.2
+go.podman.io/common/internal/attributedstring
+go.podman.io/common/libnetwork/types
+go.podman.io/common/pkg/apparmor
+go.podman.io/common/pkg/apparmor/internal/supported
+go.podman.io/common/pkg/capabilities
+go.podman.io/common/pkg/cgroups
+go.podman.io/common/pkg/cgroupv2
+go.podman.io/common/pkg/completion
+go.podman.io/common/pkg/config
+go.podman.io/common/pkg/report
+go.podman.io/common/pkg/report/camelcase
 go.podman.io/common/pkg/strongunits
+go.podman.io/common/pkg/systemd
+go.podman.io/common/version
+# go.podman.io/storage v1.61.0
+## explicit; go 1.24.0
+go.podman.io/storage/internal/rawfilelock
+go.podman.io/storage/pkg/config
+go.podman.io/storage/pkg/fileutils
+go.podman.io/storage/pkg/homedir
+go.podman.io/storage/pkg/idtools
+go.podman.io/storage/pkg/ioutils
+go.podman.io/storage/pkg/lockfile
+go.podman.io/storage/pkg/longpath
+go.podman.io/storage/pkg/mount
+go.podman.io/storage/pkg/reexec
+go.podman.io/storage/pkg/regexp
+go.podman.io/storage/pkg/system
+go.podman.io/storage/pkg/unshare
+go.podman.io/storage/types
 # go.yaml.in/yaml/v2 v2.4.2
 ## explicit; go 1.15
 go.yaml.in/yaml/v2

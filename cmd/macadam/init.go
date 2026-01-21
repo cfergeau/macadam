@@ -8,8 +8,6 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/containers/common/pkg/completion"
-	"github.com/containers/common/pkg/strongunits"
 	ldefine "github.com/containers/podman/v5/libpod/define"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/shim"
@@ -20,6 +18,8 @@ import (
 	"github.com/crc-org/macadam/pkg/preflights"
 	"github.com/docker/go-units"
 	"github.com/spf13/cobra"
+	"go.podman.io/common/pkg/completion"
+	"go.podman.io/common/pkg/strongunits"
 )
 
 var (

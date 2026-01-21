@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/containers/common/pkg/completion"
 	"github.com/containers/podman/v5/libpod/define"
 	"github.com/crc-org/macadam/cmd/macadam/common"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
@@ -16,6 +15,7 @@ import (
 	provider2 "github.com/crc-org/macadam/pkg/machinedriver/provider"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"go.podman.io/common/pkg/completion"
 )
 
 // HelpTemplate is the help template for podman commands

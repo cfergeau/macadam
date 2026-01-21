@@ -8,8 +8,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/containers/common/pkg/completion"
-	"github.com/containers/common/pkg/report"
 	"github.com/containers/podman/v5/pkg/domain/entities"
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
 	"github.com/crc-org/macadam/cmd/macadam/common"
@@ -19,6 +17,8 @@ import (
 	"github.com/crc-org/machine/libmachine/state"
 	"github.com/docker/go-units"
 	"github.com/spf13/cobra"
+	"go.podman.io/common/pkg/completion"
+	"go.podman.io/common/pkg/report"
 )
 
 var (

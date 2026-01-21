@@ -23,7 +23,6 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/containers/common/pkg/strongunits"
 	"github.com/containers/podman/v5/pkg/machine"
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/podman/v5/pkg/machine/env"
@@ -31,6 +30,7 @@ import (
 	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
 	"github.com/crc-org/machine/libmachine/drivers"
 	"github.com/crc-org/machine/libmachine/state"
+	"go.podman.io/common/pkg/strongunits"
 )
 
 const (

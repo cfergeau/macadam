@@ -4,7 +4,7 @@ GIT_VERSION ?= $(shell git describe --always --dirty)
 VERSION_LDFLAGS=-X github.com/crc-org/macadam/pkg/cmdline.gitVersion=$(GIT_VERSION)
 MACADAM_LDFLAGS = \
     $(VERSION_LDFLAGS) \
-    -X github.com/containers/common/pkg/config.additionalHelperBinariesDir=$(HELPER_BINARIES_DIR)
+    -X go.podman.io/common/pkg/config.additionalHelperBinariesDir=$(HELPER_BINARIES_DIR)
 # opengpg and btrfs support are used by github.com/containers/image and
 # github.com/containers/storage when container images are fetched.
 # These require external C libraries and their headers, it's simpler to disable

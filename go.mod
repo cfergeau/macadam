@@ -3,9 +3,7 @@ module github.com/crc-org/macadam
 go 1.24.2
 
 require (
-	github.com/containers/common v0.64.2
 	github.com/containers/podman/v5 v5.3.1
-	github.com/containers/storage v1.59.1
 	github.com/crc-org/crc/v2 v2.57.0
 	github.com/crc-org/machine v0.0.0-20240926103419-a943b47fd48b
 	github.com/lima-vm/go-qcow2reader v0.7.1
@@ -13,15 +11,20 @@ require (
 	github.com/onsi/gomega v1.39.0
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
+	go.podman.io/common v0.66.1
+	go.podman.io/storage v1.61.0
 )
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
+	github.com/containers/common v0.64.2 // indirect
+	github.com/containers/storage v1.59.1 // indirect
+	github.com/docker/cli v28.5.1+incompatible // indirect
 	github.com/moby/go-archive v0.1.0 // indirect
 	github.com/opencontainers/cgroups v0.0.5 // indirect
+	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/sigstore/protobuf-specs v0.4.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
-	go.podman.io/common v0.66.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250414145226-207652e42e2e // indirect
