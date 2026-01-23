@@ -8,12 +8,12 @@ import (
 	"os"
 	"runtime"
 
-	ldefine "github.com/containers/podman/v5/libpod/define"
-	"github.com/containers/podman/v5/pkg/machine/define"
-	"github.com/containers/podman/v5/pkg/machine/env"
-	providerPodman "github.com/containers/podman/v5/pkg/machine/provider"
-	"github.com/containers/podman/v5/pkg/machine/shim"
-	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	ldefine "go.podman.io/podman/v6/libpod/define"
+	"go.podman.io/podman/v6/pkg/machine/define"
+	"go.podman.io/podman/v6/pkg/machine/env"
+	providerPodman "go.podman.io/podman/v6/pkg/machine/provider"
+	"go.podman.io/podman/v6/pkg/machine/shim"
+	"go.podman.io/podman/v6/pkg/machine/vmconfigs"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	"github.com/crc-org/macadam/pkg/imagepullers"
 	macadam "github.com/crc-org/macadam/pkg/machinedriver"
@@ -205,7 +205,7 @@ func initMachine(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("invalid name %q: %w", machineName, ldefine.RegexError)
 	}
 
-	mc, _, err := shim.VMExists(machineName, []vmconfigs.VMProvider{vmProvider})
+	mc, _, err := shim.VMExists(machineName)
 	if err != nil {
 		return err
 	}

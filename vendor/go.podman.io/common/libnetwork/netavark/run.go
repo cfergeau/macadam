@@ -12,6 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"go.podman.io/common/libnetwork/internal/util"
 	"go.podman.io/common/libnetwork/types"
+	"go.podman.io/common/pkg/config"
 )
 
 type netavarkOptions struct {
@@ -162,6 +163,18 @@ func (n *netavarkNetwork) getCommonNetavarkOptions(needPlugin bool) []string {
 }
 
 func (n *netavarkNetwork) convertNetOpts(opts types.NetworkOptions) (*netavarkOptions, bool, error) {
+	// In pasta mode, strip HostIP from port mappings. Pasta handles host-side
+	// address binding; netavark only needs DNAT rules inside the netns without
+	// "ip daddr" constraints (pasta's splice changes the destination IP).
+	if n.rootlessPortForwarder == config.RootlessPortForwarderPasta && n.networkRootless && len(opts.PortMappings) > 0 {
+		stripped := make([]types.PortMapping, len(opts.PortMappings))
+		copy(stripped, opts.PortMappings)
+		for i := range stripped {
+			stripped[i].HostIP = ""
+		}
+		opts.PortMappings = stripped
+	}
+
 	netavarkOptions := netavarkOptions{
 		NetworkOptions: opts,
 		Networks:       make(map[string]*types.Network, len(opts.Networks)),
@@ -169,12 +182,19 @@ func (n *netavarkNetwork) convertNetOpts(opts types.NetworkOptions) (*netavarkOp
 
 	needsPlugin := false
 
-	for network := range opts.Networks {
-		net, err := n.getNetwork(network)
+	foundNetwork := make(map[string]struct{}, len(opts.Networks))
+
+	for _, network := range opts.Networks {
+		if _, ok := foundNetwork[network.Name]; ok {
+			return nil, false, fmt.Errorf("network %s passed twice in NetworkOptions", network.Name)
+		}
+		foundNetwork[network.Name] = struct{}{}
+
+		net, err := n.getNetwork(network.Name)
 		if err != nil {
 			return nil, false, err
 		}
-		netavarkOptions.Networks[network] = net
+		netavarkOptions.Networks[network.Name] = net
 		if !slices.Contains(builtinDrivers, net.Driver) {
 			needsPlugin = true
 		}

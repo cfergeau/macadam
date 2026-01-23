@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/containers/podman/v5/pkg/domain/entities"
-	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	"go.podman.io/podman/v6/pkg/domain/entities"
+	"go.podman.io/podman/v6/pkg/machine/vmconfigs"
 	"github.com/crc-org/macadam/cmd/macadam/common"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	macadam "github.com/crc-org/macadam/pkg/machinedriver"

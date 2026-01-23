@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/containers/podman/v5/pkg/machine/define"
+	"go.podman.io/podman/v6/pkg/machine/define"
 	"github.com/crc-org/macadam/pkg/imagepullers"
 
 	"github.com/crc-org/macadam/test/osprovider"

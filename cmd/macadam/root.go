@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/containers/podman/v5/libpod/define"
+	"go.podman.io/podman/v6/libpod/define"
 	"github.com/crc-org/macadam/cmd/macadam/common"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	"github.com/crc-org/macadam/pkg/cmdline"

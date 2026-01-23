@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/containers/podman/v5/pkg/machine/define"
-	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	"go.podman.io/podman/v6/pkg/machine/define"
+	"go.podman.io/podman/v6/pkg/machine/vmconfigs"
 	"go.podman.io/storage/pkg/homedir"
 )
 

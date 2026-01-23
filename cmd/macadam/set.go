@@ -6,9 +6,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/containers/podman/v5/pkg/machine/define"
-	"github.com/containers/podman/v5/pkg/machine/shim"
-	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	"go.podman.io/podman/v6/pkg/machine/define"
+	"go.podman.io/podman/v6/pkg/machine/shim"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	provider2 "github.com/crc-org/macadam/pkg/machinedriver/provider"
 	"github.com/shirou/gopsutil/v4/mem"
@@ -92,7 +91,7 @@ func setMachine(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	mc, _, err := shim.VMExists(machineName, []vmconfigs.VMProvider{vmProvider})
+	mc, _, err := shim.VMExists(machineName)
 	if err != nil {
 		return err
 	}

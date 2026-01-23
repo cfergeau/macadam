@@ -5,9 +5,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/containers/podman/v5/pkg/machine"
-	"github.com/containers/podman/v5/pkg/machine/shim"
-	"github.com/containers/podman/v5/pkg/machine/vmconfigs"
+	"go.podman.io/podman/v6/pkg/machine"
+	"go.podman.io/podman/v6/pkg/machine/shim"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	macadam "github.com/crc-org/macadam/pkg/machinedriver"
 	provider2 "github.com/crc-org/macadam/pkg/machinedriver/provider"
@@ -52,7 +51,7 @@ func start(_ *cobra.Command, args []string) error {
 	}
 	// set exclusive mode to false so to allow multiple VMs to run at the same time
 	vmProvider.SetExclusiveActive(false)
-	vmConfig, _, err := shim.VMExists(initOpts.Name, []vmconfigs.VMProvider{vmProvider})
+	vmConfig, _, err := shim.VMExists(initOpts.Name)
 	if err != nil {
 		return err
 	}

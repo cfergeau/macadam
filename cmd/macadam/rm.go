@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/containers/podman/v5/pkg/machine"
+	"go.podman.io/podman/v6/pkg/machine"
 	"github.com/crc-org/macadam/cmd/macadam/registry"
 	macadam "github.com/crc-org/macadam/pkg/machinedriver"
 	provider2 "github.com/crc-org/macadam/pkg/machinedriver/provider"

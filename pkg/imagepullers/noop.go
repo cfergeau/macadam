@@ -6,9 +6,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/containers/podman/v5/pkg/machine/define"
+	"go.podman.io/podman/v6/pkg/machine/define"
 
-	"github.com/containers/podman/v5/pkg/machine/env"
+	"go.podman.io/podman/v6/pkg/machine/env"
 )
 
 type NoopImagePuller struct {
