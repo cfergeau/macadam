@@ -2,6 +2,24 @@
 
 # Changelog
 
+## v1.43.1 (2026-04-07)
+
+    [release-1.43] Bump c/common v0.67.1, c/image v5.39.2
+    update module github.com/go-jose/go-jose/v4 to v4.1.4 [security]
+    ignore ErrLayerUnknown in cache lookup
+    fix setting of gid
+    fix call to chown
+
+## v1.43.0 (2026-02-05)
+
+    [release-1.43] Bump common 0.67.0, image 5.39.1, storage 1.62.0
+    [release-1.43] Bump dest branch in cirrus to 1.43
+    fix(build): make --tag oci-archive:xxx.tar work with simple images
+    test: do not untar archive into fs when checking file names
+    tests: use cached images instead of fedoraproject.org
+    chroot.bats(chroot with overlay root): ensure we can overlay
+    Run: don't try to encode SystemContext with json
+
 ## v1.42.2 (2025-12-02)
 
     [release-1.42] Bump runc to v1.3.4

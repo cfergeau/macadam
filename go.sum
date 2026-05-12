@@ -30,6 +30,8 @@ github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UF
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cfergeau/machine v0.0.0-20241127155529-1b8b9b8d1078 h1:KpgRncgq6ZiWDnLe6R58dJjd6QSuU7RDqRrpl11Dxcg=
 github.com/cfergeau/machine v0.0.0-20241127155529-1b8b9b8d1078/go.mod h1:trWeQimjfE3dJ8qWOxI4ePtYm13aecK42bf01s6h/Nc=
+github.com/cfergeau/podman/v5 v5.0.0-20260512160951-e60ecee72653 h1:S/oEM/dWlLwfe3Mq43bcuE+6BMDITPCL1iwW9GCG3Hk=
+github.com/cfergeau/podman/v5 v5.0.0-20260512160951-e60ecee72653/go.mod h1:cAgzJ6c0RQElbuj3Zmgnsj/02TKRLQ+h3u1t1iACBvw=
 github.com/checkpoint-restore/checkpointctl v1.4.0 h1:3kRns56TArwiyHOMakaumUgSZZlB1hZBkjVgR6IeZ3E=
 github.com/checkpoint-restore/checkpointctl v1.4.0/go.mod h1:ynQ52zQBazgcTZuxpwTFzRinIcAf0haDTC1X1LA/FKA=
 github.com/checkpoint-restore/go-criu/v7 v7.2.0 h1:qGiWA4App1gGlEfIJ68WR9jbezV9J7yZdjzglezcqKo=
@@ -59,8 +61,8 @@ github.com/containernetworking/cni v1.3.0 h1:v6EpN8RznAZj9765HhXQrtXgX+ECGebEYEm
 github.com/containernetworking/cni v1.3.0/go.mod h1:Bs8glZjjFfGPHMw6hQu82RUgEPNGEaBb9KS5KtNMnJ4=
 github.com/containernetworking/plugins v1.8.0 h1:WjGbV/0UQyo8A4qBsAh6GaDAtu1hevxVxsEuqtBqUFk=
 github.com/containernetworking/plugins v1.8.0/go.mod h1:JG3BxoJifxxHBhG3hFyxyhid7JgRVBu/wtooGEvWf1c=
-github.com/containers/buildah v1.42.2 h1:be4mKtMOtvuW3R1TYWP+MupxzCaq6PRn7+m1iZH9YbE=
-github.com/containers/buildah v1.42.2/go.mod h1:SDA+ClXamnZPV7GBS2uKY0dfXKfvTykSUA+kJWa1mNg=
+github.com/containers/buildah v1.43.1 h1:hZO/b0BxDTu38vVc3CaUhe1q3s+q2Y3goeY6QRqm4Qg=
+github.com/containers/buildah v1.43.1/go.mod h1:LSi6Syf+ntc1g0WcUa7yb5dT1W2KzA//+aW+TLgj1os=
 github.com/containers/common v0.64.2 h1:1xepE7QwQggUXxmyQ1Dbh6Cn0yd7ktk14sN3McSWf5I=
 github.com/containers/common v0.64.2/go.mod h1:o29GfYy4tefUuShm8mOn2AiL5Mpzdio+viHI7n24KJ4=
 github.com/containers/conmon v2.0.20+incompatible h1:YbCVSFSCqFjjVwHTPINGdMX1F6JXHGTUje2ZYobNrkg=
@@ -86,8 +88,6 @@ github.com/coreos/go-systemd/v22 v22.7.0/go.mod h1:xNUYtjHu2EDXbsxz1i41wouACIwT7
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/crc-org/crc/v2 v2.59.0 h1:dgdjaQkfldvjo9FTclVnFWJl38E/gKKWZrFXCvHXr7g=
 github.com/crc-org/crc/v2 v2.59.0/go.mod h1:XXi41qqnvipav+QkH4YYn4Of11lyccvD67QiRBIG6YE=
-github.com/crc-org/podman-macadam/v5 v5.0.0-20260331171210-b5ac9170d1ad h1:WFxQLR//muyBv73A42FydisS9bOj2DtfWqW5brmUinY=
-github.com/crc-org/podman-macadam/v5 v5.0.0-20260331171210-b5ac9170d1ad/go.mod h1:EpazZY2yQTk7w+Ok9M9XpUWVsdkH4wW1ATUZhf3GH9g=
 github.com/crc-org/vfkit v0.6.3 h1:X6pHxDWx0jQRV6TpzCmI4tfPyW/2R03HEEiS5vNnsBU=
 github.com/crc-org/vfkit v0.6.3/go.mod h1:jp0CkOQW5BAvSdJSV7OHUuTGRUo7+/fwaFHd+92pqR8=
 github.com/creack/pty v1.1.21 h1:1/QdRyBaHHJP61QkWMXlOIBfsgdDeeKfK8SYVUWJKf0=
@@ -141,8 +141,8 @@ github.com/gkampitakis/go-diff v1.3.2 h1:Qyn0J9XJSDTgnsgHRdz9Zp24RaJeKMUHg2+PDZZ
 github.com/gkampitakis/go-diff v1.3.2/go.mod h1:LLgOrpqleQe26cte8s36HTWcTmMEur6OPYerdAAS9tk=
 github.com/gkampitakis/go-snaps v0.5.15 h1:amyJrvM1D33cPHwVrjo9jQxX8g/7E2wYdZ+01KS3zGE=
 github.com/gkampitakis/go-snaps v0.5.15/go.mod h1:HNpx/9GoKisdhw9AFOBT1N7DBs9DiHo/hGheFGBZ+mc=
-github.com/go-jose/go-jose/v4 v4.1.3 h1:CVLmWDhDVRa6Mi/IgCgaopNosCaHz7zrMeF9MlZRkrs=
-github.com/go-jose/go-jose/v4 v4.1.3/go.mod h1:x4oUasVrzR7071A4TnHLGSPpNOm2a21K9Kf04k1rs08=
+github.com/go-jose/go-jose/v4 v4.1.4 h1:moDMcTHmvE6Groj34emNPLs/qtYXRVcd6S7NHbHz3kA=
+github.com/go-jose/go-jose/v4 v4.1.4/go.mod h1:x4oUasVrzR7071A4TnHLGSPpNOm2a21K9Kf04k1rs08=
 github.com/go-logr/logr v1.2.2/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
@@ -441,10 +441,10 @@ go.opentelemetry.io/otel/trace v1.38.0 h1:Fxk5bKrDZJUH+AMyyIXGcFAPah0oRcT+LuNtJr
 go.opentelemetry.io/otel/trace v1.38.0/go.mod h1:j1P9ivuFsTceSWe1oY+EeW3sc+Pp42sO++GHkg4wwhs=
 go.opentelemetry.io/proto/otlp v1.7.1 h1:gTOMpGDb0WTBOP8JaO72iL3auEZhVmAQg4ipjOVAtj4=
 go.opentelemetry.io/proto/otlp v1.7.1/go.mod h1:b2rVh6rfI/s2pHWNlB7ILJcRALpcNDzKhACevjI+ZnE=
-go.podman.io/common v0.67.0 h1:6Ci5oU1ek08OAxBLkHEqSyWmjNh5zf03PRqZ04cPdwU=
-go.podman.io/common v0.67.0/go.mod h1:sB9L8LMtmf5Hpek2qkEyRrcSzpb+gYpG3vq5Khima3U=
-go.podman.io/image/v5 v5.39.1 h1:loIw4qHzZzBlUguYZau40u8HbR5MrTPQhwT4Hy6sCm0=
-go.podman.io/image/v5 v5.39.1/go.mod h1:SlaR6Pra1ATIx4BcuZ16oafb3QcCHISaKcJbtlN/G/0=
+go.podman.io/common v0.67.1 h1:HddYLJfkfFUmFJ0V3PVoewguFM9eHkqk0g+fOc2B9R4=
+go.podman.io/common v0.67.1/go.mod h1:XVmSLtnhJwGb+ImYn6BXiozxVE3mYZJgiiBuDOiOquk=
+go.podman.io/image/v5 v5.39.2 h1:EJua/pRtvgLV/a5y8/RvA+ekKukZh0UuKMvLdTmEWFk=
+go.podman.io/image/v5 v5.39.2/go.mod h1:SlaR6Pra1ATIx4BcuZ16oafb3QcCHISaKcJbtlN/G/0=
 go.podman.io/storage v1.62.0 h1:0QjX1XlzVmbiaulb+aR/CG6p9+pzaqwIeZPe3tEjHbY=
 go.podman.io/storage v1.62.0/go.mod h1:A3UBK0XypjNZ6pghRhuxg62+2NIm5lcUGv/7XyMhMUI=
 go.yaml.in/yaml/v2 v2.4.3 h1:6gvOSjQoTB3vt1l+CU+tSyi/HOjfOjRLJ4YwYZGwRO0=
