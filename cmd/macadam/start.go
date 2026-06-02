@@ -23,7 +23,8 @@ var (
 		Args:    cobra.MaximumNArgs(1),
 		Example: `macadam start`,
 	}
-	startOpts = machine.StartOptions{}
+	startOpts = machine.StartOptions{
+	}
 )
 
 func init() {

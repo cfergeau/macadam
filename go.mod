@@ -190,4 +190,4 @@ require (
 
 replace github.com/crc-org/machine => github.com/cfergeau/machine v0.0.0-20241127155529-1b8b9b8d1078
 
-replace github.com/containers/podman/v5 => github.com/crc-org/podman-macadam/v5 v5.0.0-20260331171210-b5ac9170d1ad
+replace github.com/containers/podman/v5 => github.com/crc-org/podman-macadam/v5 v5.0.0-20260617151037-14ef5cfd632d

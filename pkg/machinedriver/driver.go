@@ -258,6 +258,8 @@ func Start(vmConfig *vmconfigs.MachineConfig, vmProvider vmconfigs.VMProvider) e
 	fmt.Printf("Starting machine %q\n", machineName)
 
 	startOpts := machine.StartOptions{
+		// The running the e2e tests on ubuntu require slightly more time for ssh to come up
+		MaxBackoffs: 10,
 		// The ForwardSockets capabilities roughly indicates if we have a podman machine or a generic VM.
 		// For generic VMs, we don’t want to print these `info` messages as they are podman-centric.
 		NoInfo: !vmConfig.Capabilities.GetForwardSockets(),

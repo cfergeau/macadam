@@ -86,8 +86,8 @@ github.com/coreos/go-systemd/v22 v22.7.0/go.mod h1:xNUYtjHu2EDXbsxz1i41wouACIwT7
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/crc-org/crc/v2 v2.59.0 h1:dgdjaQkfldvjo9FTclVnFWJl38E/gKKWZrFXCvHXr7g=
 github.com/crc-org/crc/v2 v2.59.0/go.mod h1:XXi41qqnvipav+QkH4YYn4Of11lyccvD67QiRBIG6YE=
-github.com/crc-org/podman-macadam/v5 v5.0.0-20260331171210-b5ac9170d1ad h1:WFxQLR//muyBv73A42FydisS9bOj2DtfWqW5brmUinY=
-github.com/crc-org/podman-macadam/v5 v5.0.0-20260331171210-b5ac9170d1ad/go.mod h1:EpazZY2yQTk7w+Ok9M9XpUWVsdkH4wW1ATUZhf3GH9g=
+github.com/crc-org/podman-macadam/v5 v5.0.0-20260617151037-14ef5cfd632d h1:MWcWz1vuM70NcNJERcI3dqpgHAGsiQLNPCkmirI0RV4=
+github.com/crc-org/podman-macadam/v5 v5.0.0-20260617151037-14ef5cfd632d/go.mod h1:EpazZY2yQTk7w+Ok9M9XpUWVsdkH4wW1ATUZhf3GH9g=
 github.com/crc-org/vfkit v0.6.3 h1:X6pHxDWx0jQRV6TpzCmI4tfPyW/2R03HEEiS5vNnsBU=
 github.com/crc-org/vfkit v0.6.3/go.mod h1:jp0CkOQW5BAvSdJSV7OHUuTGRUo7+/fwaFHd+92pqR8=
 github.com/creack/pty v1.1.21 h1:1/QdRyBaHHJP61QkWMXlOIBfsgdDeeKfK8SYVUWJKf0=
