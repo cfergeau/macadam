@@ -1,13 +1,10 @@
 name: Build e2e image
 on:
+  workflow_dispatch:
   push:
     branches:
       - "main"
-    paths-ignore:
-      - 'docs/**'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
 env:
   IMAGE_NAME_E2E: macadam-e2e
 jobs:
