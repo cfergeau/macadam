@@ -3,13 +3,31 @@
 name: windows-e2e
 
 on:
-  workflow_run:
-    workflows: [Build e2e image]
-    types:
-      - completed
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+  pull_request:
 
 jobs:
+  build-qe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+      - name: Build qe oci image for windows-amd64
+        run: |
+          # e2e
+          ARCH=amd64 OS=windows make containerized_e2e
+          podman save -o ${{ env.IMAGE_NAME_E2E }}-windows-amd64.tar \
+            ${{ env.IMAGE_NAME_E2E}}:windows-amd64
+      - name: Upload e2e windows-amd64
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.IMAGE_NAME_E2E }}-windows-amd64
+          path: ${{ env.IMAGE_NAME_E2E }}-windows-amd64.tar
   windows-qe:
+    needs: build-qe
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -20,7 +38,6 @@ jobs:
           - name: wsl
             url: "https://mirror.stream.centos.org/SIGs/10-stream/altimages/images/wsl/x86_64/CentOS-Stream-Image-WSL-Base.x86_64-10-202601110111.wsl"
     if: |
-      github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.triggering_actor != 'dependabot[bot]'
     env:
