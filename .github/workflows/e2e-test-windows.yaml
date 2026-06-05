@@ -9,6 +9,9 @@ on:
       - "main"
   pull_request:
 
+env:
+  IMAGE_NAME_E2E: macadam-e2e
+
 jobs:
   build-qe:
     runs-on: ubuntu-latest
@@ -37,11 +40,7 @@ jobs:
             url: "https://crcqe-asia.s3.ap-south-1.amazonaws.com/macadam-image/Fedora-Cloud-Base-Azure-43-1.6.x86_64.vhd"
           - name: wsl
             url: "https://mirror.stream.centos.org/SIGs/10-stream/altimages/images/wsl/x86_64/CentOS-Stream-Image-WSL-Base.x86_64-10-202601110111.wsl"
-    if: |
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.triggering_actor != 'dependabot[bot]'
     env:
-      IMAGE_NAME_E2E: macadam-e2e
       windows-version: '11'
       windows-featurepack: '23h2-ent'
     permissions:
@@ -54,8 +53,6 @@ jobs:
       uses: actions/download-artifact@v8
       with:
         name: ${{ env.IMAGE_NAME_E2E }}-windows-amd64
-        run-id: ${{ github.event.workflow_run.id }}
-        github-token: ${{ github.token }}
 
     - name: Correlate
       run: |
