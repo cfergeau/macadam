@@ -50,8 +50,9 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         cd packaging/windows
-        make out/macadam-windows-amd64.msi: msidir
+        make out/macadam-windows-amd64.msi
         mv out/macadam-windows-amd64.msi ../../bin/macadam-windows-amd64.msi
+      shell: cmd
 
     - uses: actions/upload-artifact@v7
       with:
