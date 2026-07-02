@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-latest] # explicitly use 22.04 for binary compatibility with older distros
+        os: [ubuntu-22.04, macos-latest, windows-latest] # explicitly use 22.04 for binary compatibility with older distros
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout source code
@@ -41,6 +41,13 @@ jobs:
         make NO_CODESIGN=1 pkginstaller
         rm -rf ../../bin/*
         mv out/macadam-installer-macos-universal.pkg ../../bin/macadam-installer-macos-universal.pkg
+
+    - name: Build Windows Installer
+      if: matrix.os == 'windows-latest'
+      run: |
+        cd packaging/windows
+        make out/macadam-windows-amd64.msi: msidir
+        mv out/macadam-windows-amd64.msi ../../bin/macadam-windows-amd64.msi
 
     - uses: actions/upload-artifact@v7
       with:
