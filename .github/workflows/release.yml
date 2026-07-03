@@ -49,6 +49,7 @@ jobs:
     - name: Build Windows Installer
       if: matrix.os == 'windows-latest'
       run: |
+        git describe --tags --always --abbrev=0
         cd packaging/windows
         make out/macadam-windows-amd64.msi
         mv out/macadam-windows-amd64.msi ../../bin/macadam-windows-amd64.msi
